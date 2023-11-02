@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="homepage.css"/>
+</head>
+<body>
+    <div>
+        <div class="header">
+            <h1>Address Book</h1>
+        </div>
+        <div class="navbar">
+            <ul>
+                <li><a>HOME</a></li>
+                <li id="showDialog"><a>+ADD</a></li>
+                <li class="logo"><a><img src="Assets/blog-icon.png"></a></li>
+            </ul>
+        </div>
+        <div id="container-1">
+            <p id="field1"></p>
+        </div>
+        <div id="dialog">
+            <form id="myForm">
+                <div class="contactForm">
+                    <div class="nameFields">
+                        <div>
+                            <label for="name"><b>Name</b></label>
+                        </div>
+                       <div>
+                            <input class="inputName" type="text" id="name" name="name" required><br><br>
+                        </div>
+                    </div>
+                    <div>
+                        <div>
+                            <label for="email"><b>Email</b></label>
+                        </div>
+                        <div>
+                            <input class="inputName" type="email" id="email" name="emailaddress" required  onfocusout = "fieldfocus()" ><span class="required">*</span><span  class="validationmsg" id="validationMessage"></span><span id="emailerror" class="error_fields"></span>
+                        </div>
+                    </div> 
+                    <div class="mobileFields">
+                            <div class="mobileInputField">
+                                <div>
+                                    <label><b>Mobile</b></label>
+                                </div>
+                                <div>
+                                    <input class="teleInput" type="number" id="telephone" name="telephone" onkeyup="phonecheck(); return false;" ><span id="message"></span>
+                                </div>
+                            </div>
+                            <div class="landInputField">
+                                <div>
+                                    <label><b>Landline</b></label>
+                                </div>
+                               <div>
+                                    <input class="landInput" type="number" id="landline" name="telephone" onkeyup="phonecheck(); return false;" ><span id="message"></span>
+                               </div>   
+                            </div>
+                    </div>
+                    <div>
+                        <div>
+                            <label><b>Website</b></label>
+                        </div>
+                        <div>
+                            <input  class="inputName" type="text" id="webaddress" name="webaddress">
+                        </div>
+                    </div>
+                    <div>
+                        <div>
+                            <label><b>Address</b></label>
+                        </div>
+                        <div>
+                            <textarea cols="50" id="address"></textarea>
+                        </div>
+                    </div>
+                   <div>
+                    <button class="submitbtn" type="submit" onclick="onSubmit()">Add</button>
+                   </div>
+                 
+                </div>
+                
+            </form>
+        </div>
+    </div>
+    <script src="homepage.js"></script>
+</body>
+</html>

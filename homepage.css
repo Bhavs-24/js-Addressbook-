@@ -1,0 +1,106 @@
+body{
+    margin: 0px;
+}
+h1{
+    margin: 0px;
+    padding-top: 24px;
+    padding-bottom: 24px;
+    color: white;
+    padding-left: 20px;
+    font-family: Century Gothic;
+    font-weight: 500;
+    font-size: 38px;
+}
+.header{
+    margin: 0px;
+    background-color: #3399CC;
+}
+ul{
+    display: flex;
+    margin: 0px;
+    padding-left: 10px;
+}
+ul li{
+    color: white;
+    padding-left: 10px;
+    list-style: none;
+    padding: 8px;
+    font-weight: bold;
+    font-family: Century Gothic;
+}
+.navbar{
+    width: 100%;
+    background-color: black;
+}
+.navbar ul li:last-child{
+    position: absolute;
+    right: 0%;
+}
+.logo{
+    padding-top: 6px;
+}
+
+#dialog {
+    display: none;
+    position: fixed;
+    top: 60%;
+    left: 55%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border: 1px solid #afa2a2;
+    box-shadow: 0 2px 10px rgb(76 60 60 / 89%);
+}
+.contactForm{
+   /* width: 100%; */
+}
+.mobileFields{
+    display: flex;
+    margin-bottom: 5px;
+}
+.inputName{
+    margin-top: 8px;
+    width: 100%;
+    margin-bottom: 5px;
+    border: 1px solid black;
+    /* min-width: 300px; */
+}
+.teleInput{
+    margin-top: 10px;
+    padding-right: 15px;
+    border: 1px solid black;
+}
+.landInput{
+    margin-top: 10px;
+    padding-right: 15px;
+    border: 1px solid black;
+}
+.mobileInputField{
+    margin-right: 10px;
+    
+}
+.nameFields{
+    width: 100%;
+}
+textarea{
+    height: 100px;
+    resize: none;
+    margin-top: 10px;
+    border: 1px solid black;
+}
+.submitbtn{
+    border: none;
+    float: right;
+    margin-top: 5px;
+    background-color: rgb(59, 210, 59);
+    padding: 6px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+label{
+    font-family: Calibri;
+}
+.validationmsg{
+    color: red;
+    font-family: calibri light;
+}
