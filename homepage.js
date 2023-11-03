@@ -57,6 +57,7 @@ function fieldfocus(){
 
 var jsonList = [];
 function onSubmit(){
+
    // Prevent the default form submission
     var name = document.getElementById('name').value;
     var email = document.getElementById('email').value; 
@@ -83,19 +84,32 @@ function onSubmit(){
     document.getElementById('landline').value = '';
     document.getElementById('webaddress').value = '';
     document.getElementById('address').value = '';
-
     console.log('jsonList', jsonList);
-
+    
+    myFunction();
+    // document.getElementById('field1').innerHTML = jsonList.map('name');
     // Close the dialog if you have the dialog element
     // For example, if you have a dialog element with an ID 'myDialog', you can close it like this:
-    var dialog = document.getElementById('myDialog');
-    dialog.close(); // This assumes your dialog supports the close() method
+     document.getElementById('myDialog').style.display= 'none';
+    // dialog.close(); // This assumes your dialog supports the close() method
 }
 
-let text = "";
-for (let i = 0; i < jsonList.length; i++) {
-    document.getElementById('field1').innerHTML += jsonList[i].name + "<br>";
-  }
+
+
+function myFunction(){
+    var res = ''
+    jsonList.forEach(function(item)
+    {
+        res += "<li>"+item.name + "<br>" + item.email + "<br>" + item.telephone;
+
+    })
+    document.getElementById('field1').innerHTML = res;
+}
+
+// let text = "";
+// for (let i = 0; i < jsonList.length; i++) {
+//     document.getElementById('field1').innerHTML += jsonList[i].name + "<br>";
+//   }
   
   
 

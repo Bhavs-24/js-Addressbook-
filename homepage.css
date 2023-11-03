@@ -104,3 +104,6 @@ label{
     color: red;
     font-family: calibri light;
 }
+ol{
+    list-style: none;
+}
