@@ -7,9 +7,6 @@ var form = document.getElementById("myForm");
 function openDialog() {
     dialog.style.display = "block";
 }
-function closeDialog() {
-    dialog.style.display = "none";
-}
 showDialogButton.addEventListener("click", openDialog);
 
 //validate mobile number
@@ -76,19 +73,36 @@ function onSubmit(){
     console.log('jsonList', jsonList);
     
     myFunction();
-    document.getElementById('myDialog').style.display= 'none';
-    // dialog.close(); 
+    document.getElementById('dialog').style.display= 'none'; 
 }
 
 //To display data in html
-function myFunction(){
-    var res = ''
-    jsonList.forEach(function(item)
-    {
-        res += "<li>"+item.name + "<br>" + item.email + "<br>" + item.telephone;
+// function myFunction(){
+//     var res = ''
+//     jsonList.forEach(function(item)
+//     {
+//         res += "<li>"+item.name + "<br>" + item.email + "<br>" + item.telephone;
+//     })
+//     document.getElementById('field1').innerHTML = res;
+// }
+
+  function myFunction(){
+    var list = document.getElementById('contactDetails');
+    list.innerHTML = '';
+
+    jsonList.forEach(function(item,index){
+        var listItem = document.createElement("li");
+        listItem.textContent = item.name + "\n" + item.email + "\n" + item.telephone;
+        listItem.classList.add("list-item");
+
+        listItem.addEventListener("click",function(){
+            displayData(item);
+        });
+        list.append(listItem);
     })
-    document.getElementById('field1').innerHTML = res;
-}
+  }
 
-  
-
+  function displayData(item){
+    var itemDetails = document.getElementById('itemDetails');
+    itemDetails.innerHTML = item.name + "<br>Email:" + item.email + "<br>Mobile:" + item.telephone +"<br>Website:" + item.webaddress + "<br>Address:"+item.address ;
+  }

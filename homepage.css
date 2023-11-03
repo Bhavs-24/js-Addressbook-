@@ -107,3 +107,21 @@ label{
 ol{
     list-style: none;
 }
+h3{
+    font-family: Century Gothic;
+    padding-left: 20px;
+    font-size: 15px;
+}
+.container li{
+    width: 27%;
+    border: 1px solid #b0acac;
+}
+.container li:hover{
+    background-color: #CEE7F2;
+}
+.list-item {
+    white-space: pre-line; /* Use pre-line to honor line breaks */
+}
+.contact-details{
+    /* display: flex; */
+}
