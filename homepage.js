@@ -1,3 +1,4 @@
+// To open dialog box 
 const showDialogButton = document.getElementById("showDialog");
 const dialog = document.getElementById("dialog");
 const closeDialogButton = document.getElementById("closeDialog");
@@ -9,20 +10,9 @@ function openDialog() {
 function closeDialog() {
     dialog.style.display = "none";
 }
-
 showDialogButton.addEventListener("click", openDialog);
 
-// Event listener to close the dialog
-
-
-// Prevent the form from submitting (for demonstration purposes)
-// form.addEventListener("submit", function (event) {
-//     debugger
-//     event.preventDefault();
-//     alert("Form submitted! (This is a demo. Data was not actually submitted.)");
-// });
-
-
+//validate mobile number
 function phonecheck(){
 
     var mobilenumber = document.getElementById('telephone');
@@ -42,6 +32,7 @@ function phonecheck(){
     }
 }
 
+//validate email address
 function fieldfocus(){
     var emailValue = document.getElementById("email").value;
 
@@ -55,10 +46,9 @@ function fieldfocus(){
     }
 }
 
+//data is passed to json data, which is pushed to jsonlist ana make it visible in html
 var jsonList = [];
 function onSubmit(){
-
-   // Prevent the default form submission
     var name = document.getElementById('name').value;
     var email = document.getElementById('email').value; 
     var telephone = document.getElementById('telephone').value;
@@ -74,9 +64,8 @@ function onSubmit(){
         webaddress: webaddress,
         address: address
     };
-   
-    jsonList.push(formData); // Add the formData to your JSON array
-    
+    // Add the formData to your JSON array
+    jsonList.push(formData);
     // Clear the form fields
     document.getElementById('name').value = '';
     document.getElementById('email').value = '';
@@ -87,29 +76,19 @@ function onSubmit(){
     console.log('jsonList', jsonList);
     
     myFunction();
-    // document.getElementById('field1').innerHTML = jsonList.map('name');
-    // Close the dialog if you have the dialog element
-    // For example, if you have a dialog element with an ID 'myDialog', you can close it like this:
-     document.getElementById('myDialog').style.display= 'none';
-    // dialog.close(); // This assumes your dialog supports the close() method
+    document.getElementById('myDialog').style.display= 'none';
+    // dialog.close(); 
 }
 
-
-
+//To display data in html
 function myFunction(){
     var res = ''
     jsonList.forEach(function(item)
     {
         res += "<li>"+item.name + "<br>" + item.email + "<br>" + item.telephone;
-
     })
     document.getElementById('field1').innerHTML = res;
 }
 
-// let text = "";
-// for (let i = 0; i < jsonList.length; i++) {
-//     document.getElementById('field1').innerHTML += jsonList[i].name + "<br>";
-//   }
-  
   
 
