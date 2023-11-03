@@ -95,6 +95,12 @@ function onSubmit(){
         listItem.textContent = item.name + "\n" + item.email + "\n" + item.telephone;
         listItem.classList.add("list-item");
 
+        if (index === 0) {
+            listItem.classList.add("first-item");
+        }else {
+            listItem.classList.add("rest-items");
+        }
+
         listItem.addEventListener("click",function(){
             displayData(item);
         });
@@ -104,5 +110,49 @@ function onSubmit(){
 
   function displayData(item){
     var itemDetails = document.getElementById('itemDetails');
-    itemDetails.innerHTML = item.name + "<br>Email:" + item.email + "<br>Mobile:" + item.telephone +"<br>Website:" + item.webaddress + "<br>Address:"+item.address ;
+    itemDetails.innerHTML = `
+    <div>
+    <button><img class="editimage" src="Assets/edit1.jpg">Edit</button>
+    <button><img class="deleteimage"src="Assets/delete1.png">Delete</button>
+    </div>
+    <p>${item.name}</p>
+    <p>Email:${item.email}</p>
+    <p>Mobile:${item.telephone}</p>
+    <p>Landline:${item.landline}</p>
+    <p>Website:${item.webaddress}</p>
+    <p>Address:${item.address}</p>
+    
+    `;
+   
+    // item.name + "<br>Email:" + item.email + "<br>Mobile:" + item.telephone +"<br>Website:" + item.webaddress + "<br>Address:"+item.address ;
+    var editButton = document.querySelector('Assets/edit1.jpg');
+    editButton.addEventListener('click', function() {
+        // Handle edit action here
+        alert("Edit clicked for " + item.name);
+    });
   }
+//   function editItem(item) {
+//     selectedItem = item;
+//     // Prepopulate the form with the selected item's details
+//     document.getElementById('name').value = item.name;
+//     document.getElementById('email').value = item.email;
+//     document.getElementById('telephone').value = item.telephone;
+//     document.getElementById('landline').value = item.landline;
+//     document.getElementById('webaddress').value = item.webaddress;
+//     document.getElementById('address').value = item.address;
+
+//     document.getElementById('updateButton').addEventListener('click', function() {
+//         // Update the item with the edited details
+//         if (selectedItem) {
+//             selectedItem.name = document.getElementById('name').value;
+//             selectedItem.email = document.getElementById('email').value;
+//             selectedItem.telephone = document.getElementById('telephone').value;
+//             selectedItem.landline = document.getElementById('landline').value;
+//             selectedItem.webaddress = document.getElementById('webaddress').value;
+//             selectedItem.address = document.getElementById('address').value;
+//             // Display the updated details
+//             displayData(selectedItem);
+//         }
+//     });
+// }
+ 
