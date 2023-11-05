@@ -110,46 +110,24 @@ function onSubmit(){
 
 
   var selectedItem = null;
-  function displayData(item){
+  var seelctedetails =null;
+  function displayData(item){ 
+    document.getElementById('selectedname').innerHTML = item.name;
     var itemDetails = document.getElementById('itemDetails');
-    itemDetails.innerHTML = `
-    <div>
-    <button><img class="editimage" src="Assets/edit1.jpg">Edit</button>
-    <button><img class="deleteimage"src="Assets/delete1.png">Delete</button>
-    </div>
-    <p>${item.name}</p>
-    <p>Email:${item.email}</p>
-    <p>Mobile:${item.telephone}</p>
-    <p>Landline:${item.landline}</p>
-    <p>Website:${item.webaddress}</p>
-    <p>Address:${item.address}</p>
-    
-    `;
-   
-    // item.name + "<br>Email:" + item.email + "<br>Mobile:" + item.telephone +"<br>Website:" + item.webaddress + "<br>Address:"+item.address ;
-    var editButton = document.querySelector('Assets/edit1.jpg');
-    editButton.addEventListener('click', function() {
-        // Handle edit action here
-        editItem(item);
-    });
+    seelctedetails = item;
+    document.getElementById('selectedetails').style.display = 'block';
   }
-  function editItem(item) {
-    debugger
-    selectedItem = item;
-    // Prepopulate the dialog box fields with the selected item's data
-    document.getElementById('name').value = item.name;
-    document.getElementById('email').value = item.email;
-    document.getElementById('telephone').value = item.telephone;
-    document.getElementById('landline').value = item.landline;
-    document.getElementById('webaddress').value = item.webaddress;
-    document.getElementById('address').value = item.address;
+  function editItem() {
+    document.getElementById('name').value = seelctedetails.name;
+    document.getElementById('email').value = seelctedetails.email;
+    document.getElementById('telephone').value = seelctedetails.telephone;
+    document.getElementById('landline').value = seelctedetails.landline;
+    document.getElementById('webaddress').value = seelctedetails.webaddress;
+    document.getElementById('address').value = seelctedetails.address;
 
-    // Display the dialog box
     document.getElementById('dialog').style.display = 'block';
 
-    // Add an event listener for the Update button within the dialog
     document.getElementById('updateButton').addEventListener('click', function() {
-        // Update the item with the edited details
         if (selectedItem) {
             selectedItem.name = document.getElementById('name').value;
             selectedItem.email = document.getElementById('email').value;
@@ -157,11 +135,16 @@ function onSubmit(){
             selectedItem.landline = document.getElementById('landline').value;
             selectedItem.webaddress = document.getElementById('webaddress').value;
             selectedItem.address = document.getElementById('address').value;
-            // Display the updated details
             displayData(selectedItem);
         }
-
-        // Close the dialog box after updating
         document.getElementById('dialog').style.display = 'none';
     });
 }
+function deleteItem() {
+    var deleteItem = seelctedetails;
+    jsonList = jsonList.filter(function(item) {
+      return item.name !== deleteItem.name;
+    });
+    jsonList.pop();
+    myFunction();
+  }

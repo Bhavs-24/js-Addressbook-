@@ -148,3 +148,6 @@ button{
     border: none;
     background-color: white;
 }
+.options{
+    display: none;
+}
