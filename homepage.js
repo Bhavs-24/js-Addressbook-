@@ -145,9 +145,11 @@ function onSubmit(){
                 jsonList[index].webaddress = document.getElementById('webaddress').value;
                 jsonList[index].address = document.getElementById('address').value;
               }
-            myFunction();
+              myFunction();
+              document.getElementById('dialog').style.display = 'none';
+            
         }
-        document.getElementById('dialog').style.display = 'none';
+      
     });
 }
 function deleteItem() {
