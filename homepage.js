@@ -131,7 +131,7 @@ function onSubmit(){
 
     document.getElementById('dialog').style.display = 'block';
     document.getElementById('addbutton').style.display = 'none'
-;document.getElementById('updateButton').style.display ='block';
+    document.getElementById('updateButton').style.display ='block';
     document.getElementById('updateButton').addEventListener('click', function() {
       
         if (jsonList.filter((b)=>b.name==seelctedetails.name)) {
