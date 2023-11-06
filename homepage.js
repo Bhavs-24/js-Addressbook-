@@ -20,7 +20,7 @@ function phonecheck(){
 
     if(mobilenumber.value.length>10 || mobilenumber.value.length<10){
         message.style.color = badcolor;
-        message.innerHTML = "must be 10 digits";
+        message.innerHTML = "Must be 10 digits";
         return false;
     }
     else{
@@ -46,6 +46,7 @@ function fieldfocus(){
 //data is passed to json data, which is pushed to jsonlist ana make it visible in html
 var jsonList = [];
 function onSubmit(){
+    
     var name = document.getElementById('name').value;
     var email = document.getElementById('email').value; 
     var telephone = document.getElementById('telephone').value;
@@ -76,16 +77,6 @@ function onSubmit(){
     document.getElementById('dialog').style.display= 'none'; 
 }
 
-//To display data in html
-// function myFunction(){
-//     var res = ''
-//     jsonList.forEach(function(item)
-//     {
-//         res += "<li>"+item.name + "<br>" + item.email + "<br>" + item.telephone;
-//     })
-//     document.getElementById('field1').innerHTML = res;
-// }
-
   function myFunction(){
     var list = document.getElementById('contactDetails');
     list.innerHTML = '';
@@ -95,11 +86,11 @@ function onSubmit(){
         listItem.textContent = item.name + "\n" + item.email + "\n" + item.telephone;
         listItem.classList.add("list-item");
 
-        if (index === 0) {
-            listItem.classList.add("first-item");
-        }else {
-            listItem.classList.add("rest-items");
-        }
+        // if (index === 0) {
+        //     listItem.classList.add("first-child");
+        // }else {
+        //     listItem.classList.add("rest-child");
+        // }
 
         listItem.addEventListener("click",function(){
             displayData(item);
@@ -108,11 +99,16 @@ function onSubmit(){
     })
   }
 
-
   var selectedItem = null;
   var seelctedetails =null;
   function displayData(item){ 
     document.getElementById('selectedname').innerHTML = item.name;
+    document.getElementById('selectedemail').innerHTML = item.email;
+    document.getElementById('selectedmobile').innerHTML = item.telephone;
+    document.getElementById('selectedlandline').innerHTML = item.landline;
+    document.getElementById('selectedwebsite').innerHTML = item.webaddress;
+    document.getElementById('selectedaddress').innerHTML = item.address;
+
     var itemDetails = document.getElementById('itemDetails');
     seelctedetails = item;
     document.getElementById('selectedetails').style.display = 'block';
@@ -135,7 +131,8 @@ function onSubmit(){
             selectedItem.landline = document.getElementById('landline').value;
             selectedItem.webaddress = document.getElementById('webaddress').value;
             selectedItem.address = document.getElementById('address').value;
-            displayData(selectedItem);
+            // displayData(selectedItem);
+            myFunction();
         }
         document.getElementById('dialog').style.display = 'none';
     });
@@ -145,6 +142,19 @@ function deleteItem() {
     jsonList = jsonList.filter(function(item) {
       return item.name !== deleteItem.name;
     });
-    jsonList.pop();
     myFunction();
   }
+
+function closeDialog() {
+    document.getElementById('dialog').style.display = 'none';
+    clearFormFields();
+}
+
+function clearFormFields() {
+    document.getElementById('name').value = '';
+    document.getElementById('email').value = '';
+    document.getElementById('telephone').value = '';
+    document.getElementById('landline').value = '';
+    document.getElementById('webaddress').value = '';
+    document.getElementById('address').value = '';
+}

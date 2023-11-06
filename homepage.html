@@ -23,21 +23,58 @@
                 <h3>CONTACTS</h3>
                 <p ><ol id="contactDetails"></ol></p>
             </div>
-            <div id="itemDetails" class="itemDetails">
+           
+            <div class="containeritems">
+                <div id="itemDetails" class="itemDetails">
+                    <div id="selectedetails" class="options">
+                        <div class="edit-deleteopts">
+                            <div>
+                                <p id="selectedname" class="detailsname"></p>
+                                <p>Email:<span id="selectedemail"></span></p>
+                                <p>Mobile:<span id="selectedmobile"></span></p>
+                                <p>Landline:<span id="selectedlandline"></span></p>
+                                <p>Website:<span id="selectedwebsite"></span></p>
+                                <p>Address:<span id="selectedaddress"></span></p>
+                            </div>
+                            <div class="icons">
+                                <div class="edit-icon">
+                                    <div>
+                                        <img class="edit-image" src="Assets/edit1.jpg">
+                                    </div>
+                                    <div>
+                                        <button onclick="editItem()" class="editbtn">edit</button>
+                                    </div>
+                                   
+                                </div>
+                                <div class="delete-icon">
+                                    <div>
+                                        <img class="delete-image" src="Assets/delete2.png">
+                                    </div>
+                                    <div>
+                                        <button onclick="deleteItem()" class="deletebtn">delete</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
         </div>
-        </div>
+       
         <div id="dialog">
+          
             <form id="myForm">
                 <div class="contactForm">
+                    <div id="errorMessage" class="error_validation"></div>
+                    <span class="close-icon" onclick="closeDialog()">&#x2716;</span>
                     <div class="nameFields">
                         <div>
                             <label for="name"><b>Name</b></label>
                         </div>
                        <div>
-                            <input class="inputName" type="text" id="name"  required><br><br>
+                            <input class="inputName" type="text" id="name"  required><br>
                         </div>
                     </div>
-                    <div>
+                    <div class="emailFields">
                         <div>
                             <label for="email"><b>Email</b></label>
                         </div>
@@ -51,7 +88,11 @@
                                     <label><b>Mobile</b></label>
                                 </div>
                                 <div>
-                                    <input class="teleInput" type="number" id="telephone"  onkeyup="phonecheck(); return false;" ><span id="message"></span>
+                                    <input class="teleInput" type="number" id="telephone"  onkeyup="phonecheck(); return false;" >
+                                  
+                                </div>
+                                <div>
+                                    <span id="message"  class="validationmsg"></span>
                                 </div>
                             </div>
                             <div class="landInputField">
@@ -80,7 +121,8 @@
                         </div>
                     </div>
                    <div>
-                    <button class="submitbtn" type="submit" onclick="onSubmit()">Add</button>
+                        <button class="submitbtn" type="submit" onclick="onSubmit()" id="updateButton">Add</button>
+                        <!-- <button class="submitbtn" type="submit" id ="updateButton">Update</button> -->
                    </div>
                  
                 </div>
@@ -88,13 +130,7 @@
             </form>
         </div>
     </div>
-    <div id="selectedetails" class="options">
-        <button onclick="editItem()">edit</button>
-        <button onclick="deleteItem()">delete</button>
-        <p id="selectedname"></p>
-        <p id="selectedemail"></p>
-
-    </div>
+    
     <script src="homepage.js"></script>
 </body> 
 </html>

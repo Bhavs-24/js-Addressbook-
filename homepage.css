@@ -48,31 +48,33 @@ ul li{
     transform: translate(-50%, -50%);
     background-color: white;
     padding: 20px;
+    /* padding-right: 30px; */
     border: 1px solid #afa2a2;
     box-shadow: 0 2px 10px rgb(76 60 60 / 89%);
 }
-.contactForm{
-   /* width: 100%; */
-}
+
 .mobileFields{
     display: flex;
     margin-bottom: 5px;
 }
 .inputName{
     margin-top: 8px;
-    width: 100%;
+    width: 97%;
     margin-bottom: 5px;
     border: 1px solid black;
-    /* min-width: 300px; */
+    padding: 5px;
 }
 .teleInput{
-    margin-top: 10px;
+    margin-top: 8px;
+    padding-right: 24px;
+    padding: 5px;
     padding-right: 15px;
     border: 1px solid black;
 }
 .landInput{
-    margin-top: 10px;
-    padding-right: 15px;
+    margin-top: 8px;
+    padding: 5px;
+    padding-right: 24px;
     border: 1px solid black;
 }
 .mobileInputField{
@@ -80,6 +82,9 @@ ul li{
     
 }
 .nameFields{
+    width: 100%;
+}
+.emailFields{
     width: 100%;
 }
 textarea{
@@ -92,7 +97,10 @@ textarea{
     border: none;
     float: right;
     margin-top: 5px;
-    background-color: rgb(59, 210, 59);
+    font-family: Calibri Light;
+    font-weight: lighter;
+    color: white;
+    background-color:#468C00;
     padding: 6px;
     padding-left: 20px;
     padding-right: 20px;
@@ -117,7 +125,7 @@ h3{
 }
 .container li{
     width: 55%;
-    padding: 10px;
+    padding: 15px;
     border: 1px solid #b0acac;
 }
 .container li:hover{
@@ -150,4 +158,40 @@ button{
 }
 .options{
     display: none;
+
+}
+.edit-deleteopts{
+    display: flex;
+}
+.icons{
+    display: flex;
+}
+.detailsname{
+    margin-top: 0px;
+}
+.edit-icon{
+    display: flex;
+}
+.containeritems{
+    margin: 20px;
+    margin-left: 0px;
+}
+.edit-image{
+    width: 18px;
+    padding-left: 5em;
+}
+.editbtn{
+    margin-bottom: 17px;
+}
+.delete-icon{
+    display: flex;
+}
+.delete-image{
+    padding-left: 20px;
+}
+.deletebtn{
+    margin-bottom: 14px;
+}
+.close-icon{
+    float: right;
 }
