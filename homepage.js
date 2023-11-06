@@ -3,6 +3,7 @@ const showDialogButton = document.getElementById("showDialog");
 const dialog = document.getElementById("dialog");
 const closeDialogButton = document.getElementById("closeDialog");
 var form = document.getElementById("myForm");
+document.getElementById('updateButton').style.display ='none';
 
 function openDialog() {
     dialog.style.display = "block";
@@ -54,6 +55,10 @@ function onSubmit(){
     var webaddress = document.getElementById('webaddress').value;
     var address = document.getElementById('address').value;
 
+    if(name.trim() === "" || email.trim() === ""){
+        document.getElementById('error_message').innerHTML = "Please fill all the details";
+    }else{
+        document.getElementById('error_message').innerHTML = "";
     var formData = {
         name: name,
         email: email,
@@ -62,6 +67,8 @@ function onSubmit(){
         webaddress: webaddress,
         address: address
     };
+
+    
     // Add the formData to your JSON array
     jsonList.push(formData);
     // Clear the form fields
@@ -75,6 +82,7 @@ function onSubmit(){
     
     myFunction();
     document.getElementById('dialog').style.display= 'none'; 
+}
 }
 
   function myFunction(){
@@ -122,19 +130,21 @@ function onSubmit(){
     document.getElementById('address').value = seelctedetails.address;
 
     document.getElementById('dialog').style.display = 'block';
-
+    document.getElementById('addbutton').style.display = 'none'
+;document.getElementById('updateButton').style.display ='block';
     document.getElementById('updateButton').addEventListener('click', function() {
-        debugger
+      
         if (jsonList.filter((b)=>b.name==seelctedetails.name)) {
             debugger
-            var details_name = jsonList.filter((b)=>b.name==seelctedetails.name).indexOf();
-            selectedItem.name = document.getElementById('name').value;
-            selectedItem.email = document.getElementById('email').value;
-            selectedItem.telephone = document.getElementById('telephone').value;
-            selectedItem.landline = document.getElementById('landline').value;
-            selectedItem.webaddress = document.getElementById('webaddress').value;
-            selectedItem.address = document.getElementById('address').value;
-            // displayData(selectedItem);
+            var index = jsonList.findIndex((b) => b.name === seelctedetails.name);
+            if (index !== -1) {
+                jsonList[index].name = document.getElementById('name').value;
+                jsonList[index].email = document.getElementById('email').value;
+                jsonList[index].telephone = document.getElementById('telephone').value;
+                jsonList[index].landline = document.getElementById('landline').value;
+                jsonList[index].webaddress = document.getElementById('webaddress').value;
+                jsonList[index].address = document.getElementById('address').value;
+              }
             myFunction();
         }
         document.getElementById('dialog').style.display = 'none';
