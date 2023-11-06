@@ -124,7 +124,10 @@ function onSubmit(){
     document.getElementById('dialog').style.display = 'block';
 
     document.getElementById('updateButton').addEventListener('click', function() {
-        if (selectedItem) {
+        debugger
+        if (jsonList.filter((b)=>b.name==seelctedetails.name)) {
+            debugger
+            var details_name = jsonList.filter((b)=>b.name==seelctedetails.name).indexOf();
             selectedItem.name = document.getElementById('name').value;
             selectedItem.email = document.getElementById('email').value;
             selectedItem.telephone = document.getElementById('telephone').value;
@@ -147,7 +150,7 @@ function deleteItem() {
 
 function closeDialog() {
     document.getElementById('dialog').style.display = 'none';
-    clearFormFields();
+  clearFormFields();
 }
 
 function clearFormFields() {
