@@ -198,3 +198,6 @@ button{
 .error_validation{
     color: red;
 }
+.list-item:first-child {
+    font-size: 16px; /* Replace 16px with your desired font size */
+  }

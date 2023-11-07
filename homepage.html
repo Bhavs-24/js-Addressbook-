@@ -42,7 +42,7 @@
                                         <img class="edit-image" src="Assets/edit1.jpg">
                                     </div>
                                     <div>
-                                        <button onclick="editItem()" class="editbtn">edit</button>
+                                        <button onclick="editItem(this)" class="editbtn">edit</button>
                                     </div>
                                    
                                 </div>
@@ -62,7 +62,7 @@
        
         <div id="dialog">
           
-            <form id="myForm">
+            <div id="myForm">
                 <div class="contactForm">
                     <div id="error_message" class="error_validation"></div>
                     <span class="close-icon" onclick="closeDialog()">&#x2716;</span>
@@ -121,13 +121,13 @@
                         </div>
                     </div>
                    <div>
-                        <button class="submitbtn" type="submit" onclick="onSubmit()" id="addbutton">Add</button>
-                        <button class="submitbtn" type="submit"  id="updateButton">Update</button>
+                        <button class="submitbtn"  onclick="onSubmit()" id="addbutton">Add</button>
+                        <button class="submitbtn"   id="updateButton"  onclick="onUpdate()">Update</button>
                    </div>
                  
                 </div>
                 
-            </form>
+            </div>
         </div>
     </div>
     
