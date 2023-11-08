@@ -41,7 +41,7 @@ ul li{
 }
 
 #dialog {
-    display: none;
+    /* display: none; */
     position: fixed;
     top: 60%;
     left: 55%;
@@ -200,4 +200,7 @@ button{
 }
 .list-item:first-child {
     font-size: 16px; /* Replace 16px with your desired font size */
-  }
+}
+.hidden {
+    display: none;
+}

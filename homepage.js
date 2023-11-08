@@ -2,12 +2,12 @@
 const showDialogButton = document.getElementById("showDialog");
 const dialog = document.getElementById("dialog");
 const closeDialogButton = document.getElementById("closeDialog");
-document.getElementById("updateButton").style.display = "none";
 
+updateButton.classList.add("hidden");
 function openDialog() {
-  dialog.style.display = "block";
+  dialog.classList.remove("hidden");
 }
-showDialogButton.addEventListener("click", openDialog);
+showDialogButton.onclick = openDialog;
 
 //validate mobile number
 function phonecheck() {
@@ -49,22 +49,21 @@ function onSubmit() {
   var landline = document.getElementById("landline").value;
   var webaddress = document.getElementById("webaddress").value;
   var address = document.getElementById("address").value;
- 
+
   if (name.trim() === "" || email.trim() === "") {
     document.getElementById("error_message").innerHTML =
       "Please fill all the details";
   } else {
     document.getElementById("error_message").innerHTML = "";
-     id++;
+    id++;
     var formData = {
-      id:id,
+      id: id,
       name: name,
       email: email,
       telephone: telephone,
       landline: landline,
       webaddress: webaddress,
       address: address,
-    
     };
     // Add the formData to your JSON array
     jsonList.push(formData);
@@ -78,7 +77,7 @@ function onSubmit() {
     console.log("jsonList", jsonList);
     console.log("Retrieved item with ID:", formData);
     updateLocalStorage();
-    document.getElementById("dialog").style.display = "none";
+    dialog.classList.add("hidden");
     myFunction();
   }
 }
@@ -89,12 +88,10 @@ if (storedData) {
 }
 
 function updateLocalStorage() {
-    debugger
-    localStorage.setItem("jsonList", JSON.stringify(jsonList));
-  }
+  localStorage.setItem("jsonList", JSON.stringify(jsonList));
+}
 
 function myFunction() {
-    
   var list = document.getElementById("contactDetails");
   list.innerHTML = "";
 
@@ -103,11 +100,9 @@ function myFunction() {
     listItem.textContent =
       item.name + "\n" + item.email + "\n" + item.telephone;
     listItem.classList.add("list-item");
-
-    listItem.addEventListener("click", function () {
+    listItem.onclick = function () {
       displayData(item);
-    });
-
+    };
     list.append(listItem);
   });
 }
@@ -124,59 +119,52 @@ function displayData(item) {
 
   var itemDetails = document.getElementById("itemDetails");
   seelctedetails = item;
-  document.getElementById("selectedetails").style.display = "block";
+  selectedetails.classList.remove("options");
 }
 
-function editItem(button) {
-    var itemContainer = button.closest('.options'); 
-    var selectedName = itemContainer.querySelector('#selectedname').textContent;
-    var selectedEmail = itemContainer.querySelector('#selectedemail').textContent;
-    var selectedMobile = itemContainer.querySelector('#selectedmobile').textContent;
-    var selectedLandline = itemContainer.querySelector('#selectedlandline').textContent;
-    var selectedWebsite = itemContainer.querySelector('#selectedwebsite').textContent;
-    var selectedAddress = itemContainer.querySelector('#selectedaddress').textContent;
-  
-    document.getElementById('name').value = selectedName;
-    document.getElementById('email').value = selectedEmail;
-    document.getElementById('telephone').value = selectedMobile;
-    document.getElementById('landline').value = selectedLandline;
-    document.getElementById('webaddress').value = selectedWebsite;
-    document.getElementById('address').value = selectedAddress;
-  
-  
-    document.getElementById('dialog').style.display = 'block';
-    document.getElementById('addbutton').style.display = 'none';
-    document.getElementById('updateButton').style.display = 'block';
+function editItem() {
+  debugger;
+  if (seelctedetails) {
+    document.getElementById("name").value = seelctedetails.name;
+    document.getElementById("email").value = seelctedetails.email;
+    document.getElementById("telephone").value = seelctedetails.telephone;
+    document.getElementById("landline").value = seelctedetails.landline;
+    document.getElementById("webaddress").value = seelctedetails.webaddress;
+    document.getElementById("address").value = seelctedetails.address;
+
+    dialog.classList.remove("hidden");
+    addbutton.classList.add("hidden");
+    updateButton.classList.remove("hidden");
   }
-  
-function onUpdate(){
-    debugger
-    if (seelctedetails) {
-        debugger
-        seelctedetails.name = document.getElementById("name").value;
-        seelctedetails.email = document.getElementById("email").value;
-        seelctedetails.telephone = document.getElementById("telephone").value;
-        seelctedetails.landline = document.getElementById("landline").value;
-        seelctedetails.webaddress = document.getElementById("webaddress").value;
-        seelctedetails.address = document.getElementById("address").value;
-    
-        updateLocalStorage();
-        document.getElementById("dialog").style.display = "none";
-      }
-      myFunction();
 }
+
+function onUpdate() {
+  if (seelctedetails) {
+    seelctedetails.name = document.getElementById("name").value;
+    seelctedetails.email = document.getElementById("email").value;
+    seelctedetails.telephone = document.getElementById("telephone").value;
+    seelctedetails.landline = document.getElementById("landline").value;
+    seelctedetails.webaddress = document.getElementById("webaddress").value;
+    seelctedetails.address = document.getElementById("address").value;
+
+    updateLocalStorage();
+    dialog.classList.add("hidden");
+  }
+  clearFormFields();
+  myFunction();
+}
+
 function deleteItem(button) {
-    debugger;
-    var deleteItem = seelctedetails;
-    jsonList = jsonList.filter(function (item) {
+  var deleteItem = seelctedetails;
+  jsonList = jsonList.filter(function (item) {
     return item.name !== deleteItem.name;
   });
   updateLocalStorage();
   myFunction();
 }
-  
+
 function closeDialog() {
-  document.getElementById("dialog").style.display = "none";
+  dialog.classList.add("hidden");
   clearFormFields();
 }
 
