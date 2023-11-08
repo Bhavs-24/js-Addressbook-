@@ -13,10 +13,8 @@ showDialogButton.onclick = openDialog;
 function phonecheck() {
   var mobilenumber = document.getElementById("telephone");
   var message = document.getElementById("message");
-  var badcolor = "red";
 
   if (mobilenumber.value.length > 10 || mobilenumber.value.length < 10) {
-    message.style.color = badcolor;
     message.innerHTML = "Must be 10 digits";
     return false;
   } else {
