@@ -122,7 +122,6 @@ function displayData(item) {
 }
 
 function editItem() {
-  debugger;
   if (seelctedetails) {
     document.getElementById("name").value = seelctedetails.name;
     document.getElementById("email").value = seelctedetails.email;
