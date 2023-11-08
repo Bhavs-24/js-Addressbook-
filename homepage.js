@@ -1,3 +1,4 @@
+//const contactService = require('./service.js');
 // To open dialog box
 const showDialogButton = document.getElementById("showDialog");
 const dialog = document.getElementById("dialog");
@@ -173,4 +174,16 @@ function clearFormFields() {
   document.getElementById("landline").value = "";
   document.getElementById("webaddress").value = "";
   document.getElementById("address").value = "";
+}
+
+
+contactService.addContact(1, 'John Doe', 'john@gmail.com', '123 Main St', 'Main');
+contactService.addContact(2, 'Jane Smith', 'jane@gmail.com', '456 Elm St', 'Main');
+
+const contact = contactService.getContactById(1);
+
+if (contact) {
+  console.log('Found contact:', contact);
+} else {
+  console.log('contact not found');
 }
