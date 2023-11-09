@@ -91,10 +91,6 @@ function onSubmit() {
   }
 }
 
-// var storedData = localStorage.getItem("jsonList");
-// if (storedData) {
-//   jsonList = JSON.parse(storedData);
-// }
 
 function updateLocalStorage() {
   let list = localStorage.getItem("jso");
