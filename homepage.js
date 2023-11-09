@@ -1,14 +1,18 @@
-//const contactService = require('./service.js');
 // To open dialog box
 const showDialogButton = document.getElementById("showDialog");
 const dialog = document.getElementById("dialog");
 const closeDialogButton = document.getElementById("closeDialog");
-
 updateButton.classList.add("hidden");
+
 function openDialog() {
   dialog.classList.remove("hidden");
+  addbutton.classList.remove("hidden");
+  updateButton.classList.add("hidden");
 }
 showDialogButton.onclick = openDialog;
+window.onload = () => {
+  myFunction();
+};
 
 //validate mobile number
 function phonecheck() {
@@ -39,9 +43,13 @@ function fieldfocus() {
 }
 
 //data is passed to json data, which is pushed to jsonlist ana make it visible in html
-var jsonList = [];
-var id = 0;
+var jsonList = []; 
 function onSubmit() {
+  var storedData = localStorage.getItem("jsonList");
+  if (storedData) {
+    jsonList = JSON.parse(storedData);
+  }
+  let lastItem = jsonList.at(-1)?.id || 0;
   var name = document.getElementById("name").value;
   var email = document.getElementById("email").value;
   var telephone = document.getElementById("telephone").value;
@@ -54,9 +62,9 @@ function onSubmit() {
       "Please fill all the details";
   } else {
     document.getElementById("error_message").innerHTML = "";
-    id++;
+   
     var formData = {
-      id: id,
+      id: lastItem+1,
       name: name,
       email: email,
       telephone: telephone,
@@ -66,6 +74,8 @@ function onSubmit() {
     };
     // Add the formData to your JSON array
     jsonList.push(formData);
+    var updatedContact = addContact(formData);
+    console.log("updatedddcontact", updatedContact);
     // Clear the form fields
     document.getElementById("name").value = "";
     document.getElementById("email").value = "";
@@ -81,20 +91,23 @@ function onSubmit() {
   }
 }
 
-var storedData = localStorage.getItem("jsonList");
-if (storedData) {
-  jsonList = JSON.parse(storedData);
-}
+// var storedData = localStorage.getItem("jsonList");
+// if (storedData) {
+//   jsonList = JSON.parse(storedData);
+// }
 
 function updateLocalStorage() {
+  let list = localStorage.getItem("jso");
   localStorage.setItem("jsonList", JSON.stringify(jsonList));
 }
 
 function myFunction() {
   var list = document.getElementById("contactDetails");
   list.innerHTML = "";
-
+  jsonList = JSON.parse(localStorage.getItem("jsonList")) || [];
+  contacts.length = 0;
   jsonList.forEach(function (item) {
+    addContact(item);
     var listItem = document.createElement("li");
     listItem.textContent =
       item.name + "\n" + item.email + "\n" + item.telephone;
@@ -104,6 +117,7 @@ function myFunction() {
     };
     list.append(listItem);
   });
+  updateLocalStorage();
 }
 
 var selectedItem = null;
@@ -116,8 +130,19 @@ function displayData(item) {
   document.getElementById("selectedwebsite").innerHTML = item.webaddress;
   document.getElementById("selectedaddress").innerHTML = item.address;
 
+  seelctedetails = getContactById(item.id);
+  let data = JSON.parse(localStorage.getItem("jsonList")) || [];
+  let contactIdx = data.findIndex((x) => x.id == item.id);
+  data.splice(contactIdx, 1, item);
+  localStorage.setItem("jsonList", JSON.stringify(data));
+  if (seelctedetails) {
+    console.log("Found contact:", seelctedetails);
+  } else {
+    console.log("Contact not found");
+  }
+
   var itemDetails = document.getElementById("itemDetails");
-  seelctedetails = item;
+  // seelctedetails = item;
   selectedetails.classList.remove("options");
 }
 
@@ -138,14 +163,24 @@ function editItem() {
 
 function onUpdate() {
   if (seelctedetails) {
-    seelctedetails.name = document.getElementById("name").value;
-    seelctedetails.email = document.getElementById("email").value;
-    seelctedetails.telephone = document.getElementById("telephone").value;
-    seelctedetails.landline = document.getElementById("landline").value;
-    seelctedetails.webaddress = document.getElementById("webaddress").value;
-    seelctedetails.address = document.getElementById("address").value;
+    updatedName = document.getElementById("name").value;
+    updatedEmail = document.getElementById("email").value;
+    updatedTelephone = document.getElementById("telephone").value;
+    updatedLandline = document.getElementById("landline").value;
+    updatedWebaddress = document.getElementById("webaddress").value;
+    updatedAddress = document.getElementById("address").value;
 
-    updateLocalStorage();
+    seelctedetails = updateContact(
+      seelctedetails.id,
+      updatedName,
+      updatedEmail,
+      updatedTelephone,
+      updatedLandline,
+      updatedWebaddress,
+      updatedAddress
+    );
+    console.log("selctedddd", seelctedetails);
+    displayData(seelctedetails);
     dialog.classList.add("hidden");
   }
   clearFormFields();
@@ -154,9 +189,15 @@ function onUpdate() {
 
 function deleteItem(button) {
   var deleteItem = seelctedetails;
-  jsonList = jsonList.filter(function (item) {
-    return item.name !== deleteItem.name;
-  });
+  const isDeleted = deleteContactById(deleteItem.id);
+
+  if (isDeleted) {
+    console.log(`Contact with ID ${deleteItem.id} deleted successfully.`);
+  } else {
+    console.log(`Contact with ID ${deleteItem.id} not found.`);
+  }
+  let selIdx = jsonList.findIndex((x) => x.id == deleteItem.id);
+  jsonList.splice(selIdx, 1);
   updateLocalStorage();
   myFunction();
 }
@@ -173,16 +214,4 @@ function clearFormFields() {
   document.getElementById("landline").value = "";
   document.getElementById("webaddress").value = "";
   document.getElementById("address").value = "";
-}
-
-
-contactService.addContact(1, 'John Doe', 'john@gmail.com', '123 Main St', 'Main');
-contactService.addContact(2, 'Jane Smith', 'jane@gmail.com', '456 Elm St', 'Main');
-
-const contact = contactService.getContactById(1);
-
-if (contact) {
-  console.log('Found contact:', contact);
-} else {
-  console.log('contact not found');
 }

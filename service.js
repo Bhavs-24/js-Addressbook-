@@ -1,10 +1,9 @@
-const Contact = require('./contact');
-
 const contacts = [];
 
-function addContact(Contact){
-    debugger
-    const contact = new Contact(id,name,email,telephone,landline,website,address);
+function addContact(formValue){
+    const {id,name,email,telephone,landline,webaddress,address} = formValue
+    console.log('in add contact')
+    const contact = new Contact(id,name,email,telephone,landline,webaddress,address);
     contacts.push(contact);
     return contact;
 }
@@ -13,7 +12,7 @@ function getContactById(id){
     return contacts.find(contact =>contact.id === id);
 }
 
-function updateContact(id, name, email, telephone, landline, website, address) {
+function updateContact(id, name, email, telephone, landline, webaddress, address) {
     const contactToUpdate = contacts.find(contact => contact.id === id);
 
     if (contactToUpdate) {
@@ -21,17 +20,19 @@ function updateContact(id, name, email, telephone, landline, website, address) {
         contactToUpdate.email = email;
         contactToUpdate.telephone = telephone;
         contactToUpdate.landline = landline;
-        contactToUpdate.website = website;
+        contactToUpdate.webaddress = webaddress;
         contactToUpdate.address = address;
         return contactToUpdate;
     }
-
-    return null; // Return null if the contact with the specified ID doesn't exist
+    
 }
 
-module.exports = {
-    addContact,
-    getContactById,
-    updateContact
-  };
+function deleteContactById(id) {
+    const indexToDelete = contacts.findIndex(contact => contact.id === id);
+    if (indexToDelete !== -1) {
+        contacts.splice(indexToDelete, 1);
+        return true;
+    }
+    return false; 
+}
 
