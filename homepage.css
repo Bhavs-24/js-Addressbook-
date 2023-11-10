@@ -44,7 +44,7 @@ ul li{
     /* display: none; */
     position: fixed;
     top: 60%;
-    left: 55%;
+    left: 60%;
     transform: translate(-50%, -50%);
     background-color: white;
     padding: 20px;
@@ -203,4 +203,7 @@ button{
 }
 .hidden {
     display: none;
+}
+.myform{
+    margin-right: 100px;
 }
