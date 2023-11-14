@@ -41,8 +41,8 @@ ul li{
 }
 
 #dialog {
-    position: fixed;
-    top: 60%;
+    position: absolute;
+    top: 53%;
     left: 60%;
     transform: translate(-50%, -50%);
     background-color: white;
@@ -144,6 +144,7 @@ h3{
     white-space: pre-line; /* Use pre-line to honor line breaks */
 }
 .contact-details{
+    position: relative;
     display: flex;
 }
 .first-item {
