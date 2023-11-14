@@ -188,18 +188,17 @@ button{
     padding-left: 5em;
 }
 .editbtn{
-    margin-bottom: 17px;
     font-size: 12px;
 }
 .delete-icon{
     display: flex;
 }
 .delete-image{
-    width: 18px;
+    width: 16px;
+    padding-top: 2px;
     padding-left: 20px;
 }
 .deletebtn{
-    margin-bottom: 14px;
     font-size: 12px;
 }
 .close-icon{
