@@ -130,6 +130,12 @@ h3{
 .container li:hover{
     background-color: #CEE7F2;
 }
+.container li.active {
+    background-color: #CEE7F2;
+}
+.container li p{
+    margin: 0px;
+}
 .itemDetails{
     width: 50%;
     margin: 20px;
@@ -215,4 +221,12 @@ button{
 }
 .landlinefield{
     margin: 0px;
+}
+.capitalize {
+    text-transform: capitalize;
+}
+.largefont{
+    font-size: 30px;
+    font-weight: lighter;
+    font-size: 28px;
 }

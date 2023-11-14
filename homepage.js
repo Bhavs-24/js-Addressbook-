@@ -107,11 +107,25 @@ function myFunction() {
   jsonList.forEach(function (item) {
     contactService.addContact(item);
     var listItem = document.createElement("li");
-    listItem.textContent =
-      item.name + "\n" + item.email + "\n" + item.telephone;
-    listItem.classList.add("list-item");
+    var nameParagraph = document.createElement("p");
+    nameParagraph.textContent =  item.name;
+    nameParagraph.classList.add("capitalize" , "largefont")
+    listItem.appendChild(nameParagraph);
+
+    var emailParagraph = document.createElement("p");
+    emailParagraph.textContent = item.email;
+    listItem.appendChild(emailParagraph);
+
+    var telephoneParagraph = document.createElement("p");
+    telephoneParagraph.textContent =  item.telephone;
+    listItem.appendChild(telephoneParagraph);
+
     listItem.onclick = function () {
-      displayData(item);
+    displayData(item);
+    list.querySelectorAll('li').forEach(function (li) {
+        li.classList.remove('active');
+    });
+    listItem.classList.add('active');
     };
     list.append(listItem);
   });
