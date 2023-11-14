@@ -122,6 +122,7 @@ h3{
     width: 50%;
 }
 .container li{
+    font-family: calibri;
     width: 55%;
     padding: 15px;
     border: 1px solid #b0acac;
@@ -159,6 +160,7 @@ button{
 
 }
 .edit-deleteopts{
+    font-family: calibri;
     display: flex;
 }
 .icons{
@@ -175,20 +177,23 @@ button{
     margin-left: 0px;
 }
 .edit-image{
-    width: 18px;
+    width: 12px;
     padding-left: 5em;
 }
 .editbtn{
     margin-bottom: 17px;
+    font-size: 12px;
 }
 .delete-icon{
     display: flex;
 }
 .delete-image{
+    width: 18px;
     padding-left: 20px;
 }
 .deletebtn{
     margin-bottom: 14px;
+    font-size: 12px;
 }
 .close-icon{
     float: right;
@@ -204,4 +209,10 @@ button{
 }
 .myform{
     margin-right: 100px;
+}
+.mobilefield{
+    margin: 0px;
+}
+.landlinefield{
+    margin: 0px;
 }

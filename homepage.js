@@ -1,3 +1,4 @@
+const contactService = new ContactService();
 // To open dialog box
 const showDialogButton = document.getElementById("showDialog");
 const dialog = document.getElementById("dialog");
@@ -50,7 +51,7 @@ function onSubmit() {
   if (storedData) {
     jsonList = JSON.parse(storedData);
   }
-  let lastItem = jsonList.at(-1)?.id || 0;
+ // let lastItem = jsonList.at(-1)?.id || 0;
   var name = document.getElementById("name").value;
   var email = document.getElementById("email").value;
   var telephone = document.getElementById("telephone").value;
@@ -65,7 +66,7 @@ function onSubmit() {
     document.getElementById("error_message").innerHTML = "";
    
     var formData = {
-      id: lastItem+1,
+      id: contactService.getRandomNumber(),
       name: name,
       email: email,
       telephone: telephone,
@@ -75,7 +76,7 @@ function onSubmit() {
     };
     // Add the formData to your JSON array
     jsonList.push(formData);
-    var updatedContact = addContact(formData);
+    var updatedContact = contactService.addContact(formData);
     console.log("updatedddcontact", updatedContact);
     // Clear the form fields
     document.getElementById("name").value = "";
@@ -102,9 +103,9 @@ function myFunction() {
   var list = document.getElementById("contactDetails");
   list.innerHTML = "";
   jsonList = JSON.parse(localStorage.getItem("jsonList")) || [];
-  contacts.length = 0;
+  contactService.contacts.length = 0;
   jsonList.forEach(function (item) {
-    addContact(item);
+    contactService.addContact(item);
     var listItem = document.createElement("li");
     listItem.textContent =
       item.name + "\n" + item.email + "\n" + item.telephone;
@@ -127,7 +128,7 @@ function displayData(item) {
   document.getElementById("selectedwebsite").innerHTML = item.webaddress;
   document.getElementById("selectedaddress").innerHTML = item.address;
 
-  seelctedetails = getContactById(item.id);
+  seelctedetails = contactService.getContactById(item.id);
   let data = JSON.parse(localStorage.getItem("jsonList")) || [];
   let contactIdx = data.findIndex((x) => x.id == item.id);
   data.splice(contactIdx, 1, item);
@@ -167,7 +168,7 @@ function onUpdate() {
     updatedWebaddress = document.getElementById("webaddress").value;
     updatedAddress = document.getElementById("address").value;
 
-    seelctedetails = updateContact(
+    seelctedetails = contactService.updateContact(
       seelctedetails.id,
       updatedName,
       updatedEmail,
@@ -186,7 +187,7 @@ function onUpdate() {
 
 function deleteItem(button) {
   var deleteItem = seelctedetails;
-  const isDeleted = deleteContactById(deleteItem.id);
+  const isDeleted = contactService.deleteContactById(deleteItem.id);
 
   if (isDeleted) {
     console.log(`Contact with ID ${deleteItem.id} deleted successfully.`);
