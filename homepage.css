@@ -42,7 +42,7 @@ ul li{
 
 #dialog {
     position: absolute;
-    top: 53%;
+    top: 50%;
     left: 60%;
     transform: translate(-50%, -50%);
     background-color: white;
@@ -100,8 +100,8 @@ textarea{
     color: white;
     background-color:#468C00;
     padding: 6px;
-    padding-left: 35px;
-    padding-right: 35px;
+    padding-left: 30px;
+    padding-right: 30px;
 }
 label{
     font-family: Calibri;
