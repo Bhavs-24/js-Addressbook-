@@ -8,6 +8,7 @@ function openDialog() {
   dialog.classList.remove("hidden");
   addbutton.classList.remove("hidden");
   updateButton.classList.add("hidden");
+  selectedetails.classList.add("options");
 }
 showDialogButton.onclick = openDialog;
 window.onload = () => {
