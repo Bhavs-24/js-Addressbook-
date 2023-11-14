@@ -1,7 +1,6 @@
 class ContactService {
     constructor() {
         this.contacts = [];
-         
     }
 
     getRandomNumber(){
@@ -9,11 +8,19 @@ class ContactService {
       return id;
     }
     addContact(formValue) {
-        const { id, name, email, telephone, landline, webaddress, address } = formValue;
+       // const { id, name, email, telephone, landline, webaddress, address } = formValue;
         console.log('in add contact');
-        const contact = new Contact(id, name, email, telephone, landline, webaddress, address);
+        const contact = new Contact(formValue);
         this.contacts.push(contact);
         return contact;
+    }
+
+    getAllContacts(){
+        var storedData = localStorage.getItem("jsonlist");
+        if(storedData){
+            this.contacts = JSON.parse(storedData);
+        }
+        return this.contacts;
     }
 
     getContactById(id) {
@@ -21,25 +28,21 @@ class ContactService {
     }
 
     updateContact(id, name, email, telephone, landline, webaddress, address) {
+        this.contacts = this.contacts.map(contact =>
+            contact.id === id
+                ? { ...contact, name, email, telephone, landline, webaddress, address }
+                : contact
+        );
+    
         const contactToUpdate = this.contacts.find(contact => contact.id === id);
-
-        if (contactToUpdate) {
-            contactToUpdate.name = name;
-            contactToUpdate.email = email;
-            contactToUpdate.telephone = telephone;
-            contactToUpdate.landline = landline;
-            contactToUpdate.webaddress = webaddress;
-            contactToUpdate.address = address;
-            return contactToUpdate;
-        }
+        return contactToUpdate;
     }
 
     deleteContactById(id) {
-        const indexToDelete = this.contacts.findIndex(contact => contact.id === id);
-        if (indexToDelete !== -1) {
-            this.contacts.splice(indexToDelete, 1);
-            return true;
-        }
-        return false;
+        const initialLength = this.contacts.length;
+        this.contacts = this.contacts.filter(contact => contact.id !== id);
+        const isDeleted = this.contacts.length < initialLength;
+    
+        return isDeleted;
     }
 }

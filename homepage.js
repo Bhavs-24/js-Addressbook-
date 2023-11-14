@@ -13,7 +13,8 @@ function openDialog() {
 }
 showDialogButton.onclick = openDialog;
 window.onload = () => {
-  myFunction();
+    contactService.getAllContacts();
+    myFunction();
 };
 
 //validate mobile number
@@ -210,6 +211,7 @@ function deleteItem(button) {
   let selIdx = jsonList.findIndex((x) => x.id == deleteItem.id);
   jsonList.splice(selIdx, 1);
   updateLocalStorage();
+  selectedetails.classList.add("options");
   myFunction();
 }
 
