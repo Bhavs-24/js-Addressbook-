@@ -61,7 +61,7 @@ function onSubmit() {
 
   if (name.trim() === "" || email.trim() === "") {
     document.getElementById("error_message").innerHTML =
-      "Please fill all the details";
+      "Please fill all the details!";
   } else {
     document.getElementById("error_message").innerHTML = "";
    
@@ -216,6 +216,7 @@ function deleteItem(button) {
 
 function closeDialog() {
   dialog.classList.add("hidden");
+  document.getElementById("error_message").innerHTML = "";
   clearFormFields();
 }
 

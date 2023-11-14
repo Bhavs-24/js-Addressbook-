@@ -100,8 +100,8 @@ textarea{
     color: white;
     background-color:#468C00;
     padding: 6px;
-    padding-left: 20px;
-    padding-right: 20px;
+    padding-left: 35px;
+    padding-right: 35px;
 }
 label{
     font-family: Calibri;
@@ -206,6 +206,7 @@ button{
 }
 .error_validation{
     color: red;
+    font-family: calibri;
 }
 .list-item:first-child {
     font-size: 16px; 
