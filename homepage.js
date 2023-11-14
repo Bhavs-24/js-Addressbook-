@@ -93,7 +93,6 @@ function onSubmit() {
   }
 }
 
-
 function updateLocalStorage() {
   let list = localStorage.getItem("jso");
   localStorage.setItem("jsonList", JSON.stringify(jsonList));
