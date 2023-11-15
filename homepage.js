@@ -13,8 +13,7 @@ function openDialog() {
 }
 showDialogButton.onclick = openDialog;
 window.onload = () => {
-    contactService.getAllContacts();
-    myFunction();
+  myFunction();
 };
 
 //validate mobile number
@@ -48,11 +47,6 @@ function fieldfocus() {
 //data is passed to json data, which is pushed to jsonlist ana make it visible in html
 var jsonList = []; 
 function onSubmit() {
-  var storedData = localStorage.getItem("jsonList");
-  if (storedData) {
-    jsonList = JSON.parse(storedData);
-  }
- // let lastItem = jsonList.at(-1)?.id || 0;
   var name = document.getElementById("name").value;
   var email = document.getElementById("email").value;
   var telephone = document.getElementById("telephone").value;
@@ -67,7 +61,6 @@ function onSubmit() {
     document.getElementById("error_message").innerHTML = "";
    
     var formData = {
-      id: contactService.getRandomNumber(),
       name: name,
       email: email,
       telephone: telephone,
@@ -76,8 +69,8 @@ function onSubmit() {
       address: address,
     };
     // Add the formData to your JSON array
-    jsonList.push(formData);
     var updatedContact = contactService.addContact(formData);
+    contactService.contacts.push(updatedContact);
     console.log("updatedddcontact", updatedContact);
     // Clear the form fields
     document.getElementById("name").value = "";
@@ -88,24 +81,16 @@ function onSubmit() {
     document.getElementById("address").value = "";
     console.log("jsonList", jsonList);
     console.log("Retrieved item with ID:", formData);
-    updateLocalStorage();
     dialog.classList.add("hidden");
     myFunction();
   }
 }
 
-function updateLocalStorage() {
-  let list = localStorage.getItem("jso");
-  localStorage.setItem("jsonList", JSON.stringify(jsonList));
-}
-
 function myFunction() {
-  var list = document.getElementById("contactDetails");
-  list.innerHTML = "";
-  jsonList = JSON.parse(localStorage.getItem("jsonList")) || [];
-  contactService.contacts.length = 0;
-  jsonList.forEach(function (item) {
-    contactService.addContact(item);
+    var list = document.getElementById("contactDetails");
+    list.innerHTML = "";
+    var contacts = contactService.getAllContacts();
+    contacts.forEach(function (item) {
     var listItem = document.createElement("li");
     var nameParagraph = document.createElement("p");
     nameParagraph.textContent =  item.name;
@@ -129,33 +114,32 @@ function myFunction() {
     };
     list.append(listItem);
   });
-  updateLocalStorage();
 }
 
 var selectedItem = null;
 var seelctedetails = null;
+
 function displayData(item) {
-  document.getElementById("selectedname").innerHTML = item.name;
-  document.getElementById("selectedemail").innerHTML = item.email;
-  document.getElementById("selectedmobile").innerHTML = item.telephone;
-  document.getElementById("selectedlandline").innerHTML = item.landline;
-  document.getElementById("selectedwebsite").innerHTML = item.webaddress;
-  document.getElementById("selectedaddress").innerHTML = item.address;
+  if (item && item.id) {
+    document.getElementById("selectedname").innerHTML = item.name;
+    document.getElementById("selectedemail").innerHTML = item.email;
+    document.getElementById("selectedmobile").innerHTML = item.telephone;
+    document.getElementById("selectedlandline").innerHTML = item.landline;
+    document.getElementById("selectedwebsite").innerHTML = item.webaddress;
+    document.getElementById("selectedaddress").innerHTML = item.address;
+    console.log('itemssssss', item)
 
-  seelctedetails = contactService.getContactById(item.id);
-  let data = JSON.parse(localStorage.getItem("jsonList")) || [];
-  let contactIdx = data.findIndex((x) => x.id == item.id);
-  data.splice(contactIdx, 1, item);
-  localStorage.setItem("jsonList", JSON.stringify(data));
-  if (seelctedetails) {
-    console.log("Found contact:", seelctedetails);
-  } else {
-    console.log("Contact not found");
+    seelctedetails = contactService.getContactById(item.id);
+    let data = JSON.parse(localStorage.getItem("jsonList")) || [];
+    let displayItem = data.find((x) => x.id == item.id);
+    if (displayItem) {
+      console.log("Updated contact:", displayItem);
+    } else {
+      console.log("Contact not found");
+    }
+    var itemDetails = document.getElementById("itemDetails");
+    selectedetails.classList.remove("options");
   }
-
-  var itemDetails = document.getElementById("itemDetails");
-  // seelctedetails = item;
-  selectedetails.classList.remove("options");
 }
 
 function editItem() {
@@ -170,7 +154,7 @@ function editItem() {
     dialog.classList.remove("hidden");
     addbutton.classList.add("hidden");
     updateButton.classList.remove("hidden");
-  }
+   }
 }
 
 function onUpdate() {
@@ -181,38 +165,34 @@ function onUpdate() {
     updatedLandline = document.getElementById("landline").value;
     updatedWebaddress = document.getElementById("webaddress").value;
     updatedAddress = document.getElementById("address").value;
-
-    seelctedetails = contactService.updateContact(
-      seelctedetails.id,
-      updatedName,
-      updatedEmail,
-      updatedTelephone,
-      updatedLandline,
-      updatedWebaddress,
-      updatedAddress
-    );
-    console.log("selctedddd", seelctedetails);
-    displayData(seelctedetails);
-    dialog.classList.add("hidden");
+  
+    seelctedetails = contactService.updateContact({
+    id: seelctedetails.id,
+    name: updatedName,
+    email: updatedEmail,
+    telephone: updatedTelephone,
+    landline: updatedLandline,
+    webaddress: updatedWebaddress,
+    address: updatedAddress
+    });
+  displayData(seelctedetails);
+  dialog.classList.add("hidden");
   }
   clearFormFields();
   myFunction();
 }
-
+  
 function deleteItem(button) {
   var deleteItem = seelctedetails;
   const isDeleted = contactService.deleteContactById(deleteItem.id);
-
   if (isDeleted) {
     console.log(`Contact with ID ${deleteItem.id} deleted successfully.`);
   } else {
     console.log(`Contact with ID ${deleteItem.id} not found.`);
   }
-  let selIdx = jsonList.findIndex((x) => x.id == deleteItem.id);
-  jsonList.splice(selIdx, 1);
-  updateLocalStorage();
   selectedetails.classList.add("options");
   myFunction();
+
 }
 
 function closeDialog() {
