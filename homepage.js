@@ -22,10 +22,10 @@ function phonecheck() {
   var message = document.getElementById("message");
 
   if (mobilenumber.value.length > 10 || mobilenumber.value.length < 10) {
-    message.innerHTML = "Must be 10 digits";
+    message.innerText = "Must be 10 digits";
     return false;
   } else {
-    message.innerHTML = " ";
+    message.innerText = " ";
     return true;
   }
 }
@@ -37,10 +37,10 @@ function fieldfocus() {
   const emailpattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
 
   if (!emailpattern.test(emailValue)) {
-    document.getElementById("validationMessage").innerHTML =
+    document.getElementById("validationMessage").innerText =
       "Please enter valid email";
   } else {
-    document.getElementById("validationMessage").innerHTML = "";
+    document.getElementById("validationMessage").innerText = "";
   }
 }
 
@@ -55,10 +55,10 @@ function onSubmit() {
   var address = document.getElementById("address").value;
 
   if (name.trim() === "" || email.trim() === "") {
-    document.getElementById("error_message").innerHTML =
+    document.getElementById("error_message").innerText =
       "Please fill all the details!";
   } else {
-    document.getElementById("error_message").innerHTML = "";
+    document.getElementById("error_message").innerText = "";
    
     var formData = {
       name: name,
@@ -121,12 +121,12 @@ var seelctedetails = null;
 
 function displayData(item) {
   if (item && item.id) {
-    document.getElementById("selectedname").innerHTML = item.name;
-    document.getElementById("selectedemail").innerHTML = item.email;
-    document.getElementById("selectedmobile").innerHTML = item.telephone;
-    document.getElementById("selectedlandline").innerHTML = item.landline;
-    document.getElementById("selectedwebsite").innerHTML = item.webaddress;
-    document.getElementById("selectedaddress").innerHTML = item.address;
+    document.getElementById("selectedname").innerText = item.name;
+    document.getElementById("selectedemail").innerText = item.email;
+    document.getElementById("selectedmobile").innerText = item.telephone;
+    document.getElementById("selectedlandline").innerText = item.landline;
+    document.getElementById("selectedwebsite").innerText = item.webaddress;
+    document.getElementById("selectedaddress").innerText = item.address;
     console.log('itemssssss', item)
 
     seelctedetails = contactService.getContactById(item.id);
@@ -197,7 +197,7 @@ function deleteItem(button) {
 
 function closeDialog() {
   dialog.classList.add("hidden");
-  document.getElementById("error_message").innerHTML = "";
+  document.getElementById("error_message").innerText = "";
   clearFormFields();
 }
 
