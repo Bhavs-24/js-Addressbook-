@@ -119,7 +119,7 @@ h3{
     font-size: 15px;
 }
 .container{
-    width: 32%;
+    width: 33%;
 }
 .container li{
     font-family: calibri;
@@ -180,6 +180,7 @@ button{
     display: flex;
 }
 .containeritems{
+    width: 67%;
     margin: 20px;
     margin-left: 24px;
 }
@@ -230,4 +231,7 @@ button{
     font-size: 30px;
     font-weight: lighter;
     font-size: 28px;
+}
+.fontsize{
+    font-size: 27px;
 }

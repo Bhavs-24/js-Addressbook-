@@ -21,7 +21,7 @@ class ContactService {
     localStorage.setItem("jsonList", JSON.stringify(this.contacts));
   }
   addContact(values) {
-     const { id, name, email, telephone, landline, webaddress, address } = values;
+    //  const { id, name, email, telephone, landline, webaddress, address } = values;
     console.log("in add contact");
     const contact = new Contact({...values,
       id: this.getRandomNumber(),
