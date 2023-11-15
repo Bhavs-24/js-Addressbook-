@@ -124,7 +124,6 @@ function displayData(item) {
     document.getElementById("selectedlandline").innerText = item.landline;
     document.getElementById("selectedwebsite").innerText = item.webaddress;
     document.getElementById("selectedaddress").innerText = item.address;
-    console.log('itemssssss', item)
 
     seelctedetails = contactService.getContactById(item.id);
     let data = JSON.parse(localStorage.getItem("jsonList")) || [];
