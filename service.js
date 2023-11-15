@@ -36,8 +36,8 @@ class ContactService {
       this.contacts = storedData;
     }else{
       this.contacts = this.getAllContactsFromLocal() || [
-        {id:1,name:"Chandermani Arora",email:"chandermani@technovert.com",telephone:9876543211},
-        {id:2,name:"Sashi Pagadala",email:"vijay@technovert.com",telephone:6543234412},
+        {id:1,name:"Chandermani Arora",email:"chandermani@technovert.com",telephone:9876543211,landline:678888,webaddress:"www.technovert.com",address:"Ongole"},
+        {id:2,name:"Sashi Pagadala",email:"vijay@technovert.com",telephone:6543234412,landline:986568,webaddress:"www.technovert.com",address:"Kerala"},
       ];
       this.saveContactsToLocalStorage();
     }
