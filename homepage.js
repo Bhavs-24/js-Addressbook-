@@ -67,10 +67,8 @@ function onSubmit() {
       webaddress: webaddress,
       address: address,
     };
-    // Add the formData to your JSON array
-    var updatedContact = contactService.addContact(formData);
-    contactService.contacts.push(updatedContact);
-    console.log("updatedddcontact", updatedContact);
+   var updatedContact = contactService.addContact(formData);
+   //var contactElement = createContactElement(formData);
     // Clear the form fields
     document.getElementById("name").value = "";
     document.getElementById("email").value = "";

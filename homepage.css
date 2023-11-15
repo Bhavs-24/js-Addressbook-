@@ -119,11 +119,10 @@ h3{
     font-size: 15px;
 }
 .container{
-    width: 50%;
+    width: 32%;
 }
 .container li{
     font-family: calibri;
-    width: 55%;
     padding: 15px;
     border: 1px solid #b0acac;
 }
@@ -167,6 +166,7 @@ button{
 
 }
 .edit-deleteopts{
+    padding: 10px;
     font-family: calibri;
     display: flex;
 }
@@ -181,7 +181,7 @@ button{
 }
 .containeritems{
     margin: 20px;
-    margin-left: 0px;
+    margin-left: 24px;
 }
 .edit-image{
     width: 12px;
