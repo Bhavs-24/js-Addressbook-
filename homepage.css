@@ -42,7 +42,7 @@ ul li{
 
 #dialog {
     position: absolute;
-    top: 50%;
+    top: 53%;
     left: 60%;
     transform: translate(-50%, -50%);
     background-color: white;
