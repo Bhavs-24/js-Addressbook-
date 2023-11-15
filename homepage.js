@@ -44,7 +44,6 @@ function fieldfocus() {
   }
 }
 
-//data is passed to json data, which is pushed to jsonlist ana make it visible in html
 function onSubmit() {
   var name = document.getElementById("name").value;
   var email = document.getElementById("email").value;
@@ -58,7 +57,6 @@ function onSubmit() {
       "Please fill all the details!";
   } else {
     document.getElementById("error_message").innerText = "";
-   
     var formData = {
       name: name,
       email: email,
@@ -68,7 +66,6 @@ function onSubmit() {
       address: address,
     };
    var updatedContact = contactService.addContact(formData);
-   //var contactElement = createContactElement(formData);
     // Clear the form fields
     document.getElementById("name").value = "";
     document.getElementById("email").value = "";
