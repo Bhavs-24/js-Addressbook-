@@ -45,7 +45,6 @@ function fieldfocus() {
 }
 
 //data is passed to json data, which is pushed to jsonlist ana make it visible in html
-var jsonList = []; 
 function onSubmit() {
   var name = document.getElementById("name").value;
   var email = document.getElementById("email").value;
@@ -79,7 +78,6 @@ function onSubmit() {
     document.getElementById("landline").value = "";
     document.getElementById("webaddress").value = "";
     document.getElementById("address").value = "";
-    console.log("jsonList", jsonList);
     console.log("Retrieved item with ID:", formData);
     dialog.classList.add("hidden");
     myFunction();
@@ -118,7 +116,6 @@ function myFunction() {
 
 var selectedItem = null;
 var seelctedetails = null;
-
 function displayData(item) {
   if (item && item.id) {
     document.getElementById("selectedname").innerText = item.name;
