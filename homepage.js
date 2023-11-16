@@ -1,5 +1,8 @@
 const contactService = new ContactService();
 // To open dialog box
+var selectedItem = null;
+var seelctedetails = null;
+
 const showDialogButton = document.getElementById("showDialog");
 const dialog = document.getElementById("dialog");
 const closeDialogButton = document.getElementById("closeDialog");
@@ -11,7 +14,9 @@ function openDialog() {
   updateButton.classList.add("hidden");
   selectedetails.classList.add("options");
 }
+
 showDialogButton.onclick = openDialog;
+
 window.onload = () => {
   myFunction();
 };
@@ -65,7 +70,7 @@ function onSubmit() {
       webaddress: webaddress,
       address: address,
     };
-   var updatedContact = contactService.addContact(formData);
+    var updatedContact = contactService.addContact(formData);
     // Clear the form fields
     document.getElementById("name").value = "";
     document.getElementById("email").value = "";
@@ -80,14 +85,15 @@ function onSubmit() {
 }
 
 function myFunction() {
-    var list = document.getElementById("contactDetails");
-    list.innerHTML = "";
-    var contacts = contactService.getAllContacts();
-    contacts.forEach(function (item) {
+  var list = document.getElementById("contactDetails");
+  list.innerHTML = "";
+  var contacts = contactService.getAllContacts();
+  contacts.forEach(function (item) {
     var listItem = document.createElement("li");
     var nameParagraph = document.createElement("p");
-    nameParagraph.textContent =  item.name;
-    nameParagraph.classList.add("capitalize" , "largefont")
+    nameParagraph.textContent = item.name;
+    nameParagraph.classList.add("capitalize", "largefont");
+
     listItem.appendChild(nameParagraph);
 
     var emailParagraph = document.createElement("p");
@@ -95,22 +101,21 @@ function myFunction() {
     listItem.appendChild(emailParagraph);
 
     var telephoneParagraph = document.createElement("p");
-    telephoneParagraph.textContent =  item.telephone;
+    telephoneParagraph.textContent = item.telephone;
     listItem.appendChild(telephoneParagraph);
 
     listItem.onclick = function () {
-    displayData(item);
-    list.querySelectorAll('li').forEach(function (li) {
-        li.classList.remove('active');
-    });
-    listItem.classList.add('active');
+      displayData(item);
+      list.querySelectorAll("li").forEach(function (li) {
+        li.classList.remove("active");
+      });
+      listItem.classList.add("active");
     };
+
     list.append(listItem);
   });
 }
 
-var selectedItem = null;
-var seelctedetails = null;
 function displayData(item) {
   if (item && item.id) {
     document.getElementById("selectedname").innerText = item.name;
@@ -119,8 +124,8 @@ function displayData(item) {
     document.getElementById("selectedlandline").innerText = item.landline;
     document.getElementById("selectedwebsite").innerText = item.webaddress;
     document.getElementById("selectedaddress").innerText = item.address;
-
     document.getElementById("selectedname").classList.add("fontsize");
+    
     seelctedetails = contactService.getContactById(item.id);
     let data = JSON.parse(localStorage.getItem("jsonList")) || [];
     let displayItem = data.find((x) => x.id == item.id);
@@ -146,7 +151,7 @@ function editItem() {
     dialog.classList.remove("hidden");
     addbutton.classList.add("hidden");
     updateButton.classList.remove("hidden");
-   }
+  }
 }
 
 function onUpdate() {
@@ -157,23 +162,23 @@ function onUpdate() {
     updatedLandline = document.getElementById("landline").value;
     updatedWebaddress = document.getElementById("webaddress").value;
     updatedAddress = document.getElementById("address").value;
-  
+
     seelctedetails = contactService.updateContact({
-    id: seelctedetails.id,
-    name: updatedName,
-    email: updatedEmail,
-    telephone: updatedTelephone,
-    landline: updatedLandline,
-    webaddress: updatedWebaddress,
-    address: updatedAddress
+      id: seelctedetails.id,
+      name: updatedName,
+      email: updatedEmail,
+      telephone: updatedTelephone,
+      landline: updatedLandline,
+      webaddress: updatedWebaddress,
+      address: updatedAddress,
     });
-  displayData(seelctedetails);
-  dialog.classList.add("hidden");
+    displayData(seelctedetails);
+    dialog.classList.add("hidden");
   }
   clearFormFields();
   myFunction();
 }
-  
+
 function deleteItem(button) {
   var deleteItem = seelctedetails;
   const isDeleted = contactService.deleteContactById(deleteItem.id);
@@ -184,7 +189,6 @@ function deleteItem(button) {
   }
   selectedetails.classList.add("options");
   myFunction();
-
 }
 
 function closeDialog() {

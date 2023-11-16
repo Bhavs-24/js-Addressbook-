@@ -1,45 +1,41 @@
 class ContactService {
-  contacts;
+  localStorageKey = "Contacts";
+  contacts = [
+    {
+      id: 1,
+      name: "Chandermani Arora",
+      email: "chandermani@technovert.com",
+      telephone: 9876543211,
+      landline: 678888,
+      webaddress: "www.technovert.com",
+      address: "Ongole",
+    },
+    {
+      id: 2,
+      name: "Sashi Pagadala",
+      email: "vijay@technovert.com",
+      telephone: 6543234412,
+      landline: 986568,
+      webaddress: "www.technovert.com",
+      address: "Kerala",
+    },
+  ];
 
   constructor() {
-      this.contacts = this.getAllContactsFromLocal() || [
-        {id:1,name:"Chandermani Arora",email:"chandermani@technovert.com",telephone:9876543211,landline:678888,webaddress:"www.technovert.com",address:"Ongole"},
-        {id:2,name:"Sashi Pagadala",email:"vijay@technovert.com",telephone:6543234412,landline:986568,webaddress:"www.technovert.com",address:"Kerala"},
-      ];
-      this.saveContactsToLocalStorage();
   }
 
-  getRandomNumber() {
-    var id = Math.floor(Math.random() * 1000);
-    return id;
-  }
-  getAllContactsFromLocal(){
-    var storedData = localStorage.getItem("jsonList");
-    return storedData ? JSON.parse(storedData) : null;
-  }
-  saveContactsToLocalStorage() {
-    localStorage.setItem("jsonList", JSON.stringify(this.contacts));
-  }
-  addContact(values) {
-    console.log("in add contact");
-    const contact = new Contact({...values,
-      id: this.getRandomNumber(),
-    });
-    this.contacts.push(contact);
-    this.saveContactsToLocalStorage();
+  addContact(contact) {
+    this.contacts.push(new Contact({ ...contact, id: this.getRandomNumber() }));
+    this.saveContactsToLocalStorage(this.contacts);
     return contact;
   }
 
   getAllContacts() {
-    const storedData = this.getAllContactsFromLocal();
+    var storedData = localStorage.getItem(this.localStorageKey);
     if (storedData) {
-      this.contacts = storedData;
-    }else{
-      this.contacts = this.getAllContactsFromLocal() || [
-        {id:1,name:"Chandermani Arora",email:"chandermani@technovert.com",telephone:9876543211,landline:678888,webaddress:"www.technovert.com",address:"Ongole"},
-        {id:2,name:"Sashi Pagadala",email:"vijay@technovert.com",telephone:6543234412,landline:986568,webaddress:"www.technovert.com",address:"Kerala"},
-      ];
-      this.saveContactsToLocalStorage();
+      this.contacts = JSON.parse(storedData);
+    } else {
+      this.saveContactsToLocalStorage(this.contacts);
     }
     return this.contacts;
   }
@@ -48,25 +44,29 @@ class ContactService {
     return this.contacts.find((contact) => contact.id === id);
   }
 
-  updateContact(values) {
-    const { id, name, email, telephone, landline, webaddress, address } = values;
-    this.contacts = this.contacts.map((contact) =>
-      contact.id === id
-        ? { ...contact, name, email, telephone, landline, webaddress, address }
-        : contact
+  updateContact(contact) {
+    this.contacts = this.contacts.map((c) =>
+      c.id == contact.id ? { ...contact } : c
     );
-    this.saveContactsToLocalStorage();
-    const contactToUpdate = this.contacts.find((contact) => contact.id === id);
-    return contactToUpdate;
+    this.saveContactsToLocalStorage(this.contacts);
+    return contact;
   }
-  
+
   deleteContactById(id) {
-    const initialLength = this.contacts.length;
-    this.contacts = this.contacts.filter((contact) => contact.id !== id);
-    const isDeleted = this.contacts.length < initialLength;
-    if(isDeleted){
-      this.saveContactsToLocalStorage();
+    try {
+      this.contacts = [...this.contacts.filter((contact) => contact.id !== id)];
+      return true;
+    } catch (ex) {
+      return false;
     }
-    return isDeleted;
+  }
+
+  saveContactsToLocalStorage(contacts) {
+    localStorage.setItem(this.localStorageKey, JSON.stringify(contacts));
+  }
+
+  getRandomNumber() {
+    var id = Math.floor(Math.random() * 1000);
+    return id;
   }
 }
