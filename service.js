@@ -25,7 +25,8 @@ class ContactService {
   }
 
   addContact(contact) {
-    this.contacts.push(new Contact({ ...contact, id: this.getRandomNumber() }));
+    const newContact = new Contact({ ...contact, id: this.getRandomNumber() });
+    this.contacts.push(newContact);
     this.saveContactsToLocalStorage(this.contacts);
     return contact;
   }
@@ -55,10 +56,12 @@ class ContactService {
   deleteContactById(id) {
     try {
       this.contacts = [...this.contacts.filter((contact) => contact.id !== id)];
+      this.saveContactsToLocalStorage(this.contacts);
       return true;
     } catch (ex) {
       return false;
     }
+    
   }
 
   saveContactsToLocalStorage(contacts) {

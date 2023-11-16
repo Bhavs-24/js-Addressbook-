@@ -125,10 +125,10 @@ function displayData(item) {
     document.getElementById("selectedwebsite").innerText = item.webaddress;
     document.getElementById("selectedaddress").innerText = item.address;
     document.getElementById("selectedname").classList.add("fontsize");
-    
+
     seelctedetails = contactService.getContactById(item.id);
     let data = JSON.parse(localStorage.getItem("jsonList")) || [];
-    let displayItem = data.find((x) => x.id == item.id);
+     let displayItem = data.find((x) => x.id == item.id);
     if (displayItem) {
       console.log("Updated contact:", displayItem);
     } else {
